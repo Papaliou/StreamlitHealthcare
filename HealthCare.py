@@ -120,7 +120,7 @@ elif option == "Représentations graphiques":
             pie_or_count = st.selectbox("Do you want a Pie plot or a Count plot?", ["Pie plot", "Count plot"])
             for column in selected_columns:
                 st.subheader(f"Variable: {column}")
-                fig, ax = plt.subplots(figsize=(8, 6))
+                fig, ax = plt.subplots(figsize=(12, 10))
                 if pie_or_count == "Pie plot":
                     data[column].value_counts().plot.pie(autopct='%1.1f%%', ax=ax)
                 else:  # Count plot
