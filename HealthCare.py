@@ -119,7 +119,7 @@ elif option == "Représentations graphiques":
         if selected_columns:
             pie_or_count = st.selectbox("Do you want a Pie plot or a Count plot?", ["Pie plot", "Count plot"])
             for column in selected_columns:
-                st.subheader(f"Variable: {column}")
+                #st.subheader(f"Variable: {column}")
                 fig, ax = plt.subplots(figsize=(12, 10))
                 if pie_or_count == "Pie plot":
                     data[column].value_counts().plot.pie(autopct='%1.1f%%', ax=ax)
@@ -133,7 +133,7 @@ elif option == "Représentations graphiques":
 
         if selected_columns:
             for column in selected_columns:
-                st.subheader(f"Variable: {column}")
+                #st.subheader(f"Variable: {column}")
                 fig, ax = plt.subplots()
                 sns.distplot(data[column], ax=ax)
                 st.pyplot(fig)
@@ -143,7 +143,7 @@ elif option == "Représentations graphiques":
         target_variable = st.selectbox("Choisissez une variable pour le Target bar plot", data.columns)
 
         if target_variable:
-            st.subheader("Target bar plot")
+            #st.subheader("Target bar plot")
             fig, ax = plt.subplots()
             sns.countplot(x="stroke", hue=target_variable, data=data, ax=ax)  # Assuming 'stroke' is the target variable
             st.pyplot(fig)
@@ -176,7 +176,7 @@ elif option == "Modèles de machine learning":
         # Calcul des métriques
         accuracy = accuracy_score(y_test, y_pred)
         f1 = f1_score(y_test, y_pred)
-        precision = precision_score(y_test, y_pred)
+        precision = precision_score(y_test, y_pred, zero_division=1)
 
         # Affichage des métriques
         st.write("Accuracy:", accuracy)
@@ -244,7 +244,7 @@ elif option == "Modèles de machine learning":
         # Affichage des métriques
         st.write("Accuracy:", accuracy)
         st.write("F1-score:", f1)
-        st.write("Précision:", precision)
+        st.write("Précision:", precision, zero_division=1)
 
         # Matrice de confusion
         st.subheader("Matrice de confusion")
@@ -310,7 +310,7 @@ elif option == "Modèles de machine learning":
         # Affichage des métriques
         st.write("Accuracy:", accuracy)
         st.write("F1-score:", f1)
-        st.write("Précision:", precision)
+        st.write("Précision:", precision, zero_division=1)
 
        # Matrice de confusion
         st.subheader("Matrice de confusion")
@@ -375,7 +375,7 @@ elif option == "Modèles de machine learning":
         # Affichage des métriques
         st.write("Accuracy:", accuracy)
         st.write("F1-score:", f1)
-        st.write("Précision:", precision)
+        st.write("Précision:", precision, zero_division=1)
     
     # Matrice de confusion
         st.subheader("Matrice de confusion")
