@@ -95,7 +95,7 @@ if option == "Exploration de données":
      st.write(f"{variable}: {variable_descriptions[variable]}")
 
     # Summary des données
-    st.subheader("Summary des données")
+    st.subheader("Résumé des données")
     st.write(data.describe())
 
 elif option == "Représentations graphiques":
@@ -120,7 +120,7 @@ elif option == "Représentations graphiques":
             pie_or_count = st.selectbox("Do you want a Pie plot or a Count plot?", ["Pie plot", "Count plot"])
             for column in selected_columns:
                 st.subheader(f"Variable: {column}")
-                fig, ax = plt.subplots()
+                fig, ax = plt.subplots(figsize=(8, 6))
                 if pie_or_count == "Pie plot":
                     data[column].value_counts().plot.pie(autopct='%1.1f%%', ax=ax)
                 else:  # Count plot
