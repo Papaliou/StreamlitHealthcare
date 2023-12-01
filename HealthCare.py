@@ -29,7 +29,7 @@ body {
 st.title(" Prédictions du risque d'AVC du patient.")
 
 # Chargement des données
-data = pd.read_csv("/Users/papalahi/Cardiovascular/healthcare-dataset-stroke-data.csv")
+data = pd.read_csv("./healthcare-dataset-stroke-data.csv")
 
 data = data.drop('id', axis=1)
 # Sample a subset of the data
