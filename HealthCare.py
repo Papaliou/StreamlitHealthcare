@@ -26,7 +26,7 @@ body {
     """, unsafe_allow_html=True)
 
 
-st.title(" Prédictions du risque d'AVC du patient.")
+st.title(" Prédictions du risque d'AVC d'un patient.")
 
 # Chargement des données
 data = pd.read_csv("./healthcare-dataset-stroke-data.csv")
@@ -35,13 +35,10 @@ data = data.drop('id', axis=1)
 # Sample a subset of the data
 data = data.sample(frac=0.1)
 
-# Perform one-hot encoding on the 'gender' column
-#data = pd.get_dummies(data, columns=['gender'], drop_first=True)
-
-# Convert the 'hypertension' column to integers
+# Conversion de la colonne 'hypertension' 
 data['hypertension'] = pd.to_numeric(data['hypertension'], errors='coerce')
 
-# Convert the 'Residence_type' column to integers
+# Conversion de la colonne 'Residence_type' 
 data['Residence_type'] = data['Residence_type'].replace({'Urban': 1, 'Rural': 0})
 
 
@@ -102,6 +99,8 @@ if option == "Exploration de données":
     st.write(data.describe())
 
 elif option == "Représentations graphiques":
+    model_option = st.selectbox("Choisissez un modèle", ["SVM", "KNN", "RandomForest", "Régression logistique"])
+    
     # Choix des représentations graphiques
     plot_option = st.selectbox("Choisissez une représentation graphique", ["Matrice de corrélations des variables quantitatives", "Pie plot and Count plot", "Distribution plot", "Target bar plot"])
 
