@@ -77,20 +77,25 @@ if option == "Exploration de données":
     if selected_columns:
         st.write(data[selected_columns])
 
-    # Afficher le nom des variables, leur type et leur description
-    st.subheader("Nom des variables, leur type et leur description")
-    variable_description = {
-        "age": {"type": "int", "description": "Âge du patient"},
-        "gender": {"type": "object", "description": "Homme ou femme"},
-        "hypertension": {"type": "int", "description": "0 = Pas d'hypertension  1  = hypertension"},
-        "heart_disease":{"type": "int", "description": "0 = Malade  1 = Pas"},
-        "ever_married": {"type": "object", "description": "No" or "Yes"}
-        
-        # Ajoutez les descriptions des autres variables ici
-    }
-    for column in data.columns:
-        if column in variable_description:
-            st.write(f"{column}: Type - {variable_description[column]['type']}, Description - {variable_description[column]['description']}")
+    # Create a multiple select to display variable names and descriptions
+    variable_descriptions = {
+          "gender": "Male, Female or Other",
+          "age": "Age of the patient",
+          "hypertension": "0 if the patient doesn't have hypertension, 1 if the patient has hypertension",
+          "heart_disease": "0 if the patient doesn't have any heart diseases, 1 if the patient has a heart disease",
+          "ever_married": "No or Yes",
+          "work_type": "children, Govt_jov, Never_worked, Private or Self-employed",
+          "Residence_type": "Rural or Urban",
+          "avg_glucose_level": "Average glucose level in blood",
+          "bmi": "Body mass index",
+          "smoking_status": "'formerly smoked', 'never smoked', 'smokes', or 'Unknown'",
+          "stroke": "1 if the patient had a stroke or 0 if not"
+     }
+
+    selected_variables = st.multiselect("Select variables", list(variable_descriptions.keys()))
+
+    for variable in selected_variables:
+     st.write(f"{variable}: {variable_descriptions[variable]}")
 
     # Summary des données
     st.subheader("Summary des données")
