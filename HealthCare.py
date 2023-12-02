@@ -51,10 +51,8 @@ for column in columns_temp:
     unique_values = data[column].unique()
     num_unique_values = len(unique_values)
 
-    # Create a mapping dictionary for converting unique values to integer representations
     mapping = {value: index for index, value in enumerate(unique_values)}
 
-    # Replace the categorical values with integer representations
     data[column] = data[column].map(mapping).astype(int)
 
 
@@ -74,7 +72,7 @@ if option == "Exploration de données":
     if selected_columns:
         st.write(data[selected_columns])
 
-    # Create a multiple select to display variable names and descriptions
+    # affichage des noms des variable de leurs descriptions
     variable_descriptions = {
           "gender": "Male, Female or Other",
           "age": "Age of the patient",
@@ -94,7 +92,7 @@ if option == "Exploration de données":
     for variable in selected_variables:
      st.write(f"{variable}: {variable_descriptions[variable]}")
 
-    # Summary des données
+    # Resumé des données
     st.subheader("Résumé des données")
     st.write(data.describe())
 
@@ -196,9 +194,7 @@ elif option == "Modèles de machine learning":
         plt.ylabel('Vrai label')
         plt.xlabel('Label prédit')
         st.pyplot(fig)
-
         
-
     
 # Courbe ROC
         y_scores = svm_model.predict_proba(X_test)
@@ -219,7 +215,6 @@ elif option == "Modèles de machine learning":
     elif model_option == "KNN":
         # Paramètres clés à choisir avec un curseur
         n_neighbors = st.slider("Nombre de voisins", min_value=1, max_value=10, value=5)
-        
 
         # Construction du modèle KNN avec le paramètre choisi
         knn_model = KNeighborsClassifier(n_neighbors=n_neighbors)
@@ -251,7 +246,6 @@ elif option == "Modèles de machine learning":
         
         cm = confusion_matrix(y_test, y_pred)
         TN, FP, FN, TP = cm.ravel()
-
         
         # Affichage de la matrice de confusion avec Seaborn
         fig, ax = plt.subplots()
@@ -259,8 +253,6 @@ elif option == "Modèles de machine learning":
         plt.ylabel('Vrai label')
         plt.xlabel('Label prédit')
         st.pyplot(fig)
-
-        
 
     
 # Courbe ROC
@@ -278,9 +270,6 @@ elif option == "Modèles de machine learning":
         ax1.set_ylabel('Taux de vrais positifs')
         ax1.set_xlabel('Taux de faux positifs')
         st.pyplot(fig1) 
-
-
-
 
 
     elif model_option == "Régression logistique":
@@ -326,8 +315,6 @@ elif option == "Modèles de machine learning":
         plt.xlabel('Label prédit')
         st.pyplot(fig)
 
-        
-
     
 # Courbe ROC
         y_scores = logistic_model.predict_proba(X_test)
@@ -344,8 +331,6 @@ elif option == "Modèles de machine learning":
         ax1.set_ylabel('Taux de vrais positifs')
         ax1.set_xlabel('Taux de faux positifs')
         st.pyplot(fig1) 
-
-
 
 
 
@@ -390,9 +375,6 @@ elif option == "Modèles de machine learning":
         plt.ylabel('Vrai label')
         plt.xlabel('Label prédit')
         st.pyplot(fig)
-
-        
-
 
     
 # Courbe ROC
