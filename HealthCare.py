@@ -16,14 +16,16 @@ from sklearn.impute import SimpleImputer
 from sklearn.metrics import ConfusionMatrixDisplay
 from sklearn.metrics import confusion_matrix
 
-st.markdown("""
-<style>
-body {
-    color: #fff;
-    background-color: #4f8bf9;
-}
-</style>
-    """, unsafe_allow_html=True)
+st.header("Projet de fin de Module!")
+hide_st_style = """
+            <style>
+              #MainMenu {visibility:hidden;}
+              footer {visibility:hidden}
+              header {visibility:hidden}
+            </style>
+              """
+st.markdown(hide_st_style, unsafe_allow_html=True)    
+
 
 
 st.title(" Prédictions du risque d'AVC d'un patient.")
@@ -51,8 +53,10 @@ for column in columns_temp:
     unique_values = data[column].unique()
     num_unique_values = len(unique_values)
 
+    # Create a mapping dictionary for converting unique values to integer representations
     mapping = {value: index for index, value in enumerate(unique_values)}
 
+    # Replace the categorical values with integer representations
     data[column] = data[column].map(mapping).astype(int)
 
 
@@ -72,7 +76,7 @@ if option == "Exploration de données":
     if selected_columns:
         st.write(data[selected_columns])
 
-    # affichage des noms des variable de leurs descriptions
+    # Create a multiple select to display variable names and descriptions
     variable_descriptions = {
           "gender": "Male, Female or Other",
           "age": "Age of the patient",
@@ -92,7 +96,7 @@ if option == "Exploration de données":
     for variable in selected_variables:
      st.write(f"{variable}: {variable_descriptions[variable]}")
 
-    # Resumé des données
+    # Summary des données
     st.subheader("Résumé des données")
     st.write(data.describe())
 
@@ -194,7 +198,9 @@ elif option == "Modèles de machine learning":
         plt.ylabel('Vrai label')
         plt.xlabel('Label prédit')
         st.pyplot(fig)
+
         
+
     
 # Courbe ROC
         y_scores = svm_model.predict_proba(X_test)
@@ -215,6 +221,7 @@ elif option == "Modèles de machine learning":
     elif model_option == "KNN":
         # Paramètres clés à choisir avec un curseur
         n_neighbors = st.slider("Nombre de voisins", min_value=1, max_value=10, value=5)
+        
 
         # Construction du modèle KNN avec le paramètre choisi
         knn_model = KNeighborsClassifier(n_neighbors=n_neighbors)
@@ -246,6 +253,7 @@ elif option == "Modèles de machine learning":
         
         cm = confusion_matrix(y_test, y_pred)
         TN, FP, FN, TP = cm.ravel()
+
         
         # Affichage de la matrice de confusion avec Seaborn
         fig, ax = plt.subplots()
@@ -253,6 +261,8 @@ elif option == "Modèles de machine learning":
         plt.ylabel('Vrai label')
         plt.xlabel('Label prédit')
         st.pyplot(fig)
+
+        
 
     
 # Courbe ROC
@@ -270,6 +280,9 @@ elif option == "Modèles de machine learning":
         ax1.set_ylabel('Taux de vrais positifs')
         ax1.set_xlabel('Taux de faux positifs')
         st.pyplot(fig1) 
+
+
+
 
 
     elif model_option == "Régression logistique":
@@ -315,6 +328,8 @@ elif option == "Modèles de machine learning":
         plt.xlabel('Label prédit')
         st.pyplot(fig)
 
+        
+
     
 # Courbe ROC
         y_scores = logistic_model.predict_proba(X_test)
@@ -331,6 +346,8 @@ elif option == "Modèles de machine learning":
         ax1.set_ylabel('Taux de vrais positifs')
         ax1.set_xlabel('Taux de faux positifs')
         st.pyplot(fig1) 
+
+
 
 
 
@@ -375,6 +392,9 @@ elif option == "Modèles de machine learning":
         plt.ylabel('Vrai label')
         plt.xlabel('Label prédit')
         st.pyplot(fig)
+
+        
+
 
     
 # Courbe ROC
